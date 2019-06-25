@@ -1,5 +1,6 @@
 <?php
 require_once '/var/www/vendor/autoload.php';
+require_once 'beerArray.php';
 
 $pdo = new PDO('mysql:host=blog.mysql;dbname=blog', 'userblog', 'blogpwd');
 
@@ -28,6 +29,7 @@ $etape = $pdo->exec("CREATE TABLE user(
             PRIMARY KEY(id)
         )");
 echo "||";
+
 $pdo->exec("CREATE TABLE post_category(
             post_id INT UNSIGNED NOT NULL,
             category_id INT UNSIGNED NOT NULL,
@@ -44,6 +46,56 @@ $pdo->exec("CREATE TABLE post_category(
                 ON UPDATE RESTRICT
         )");
 echo "||";
+
+$pdo->exec("CREATE TABLE `beer` (
+    `id` int(11) NOT NULL,
+    `title` varchar(255) NOT NULL,
+    `img` text NOT NULL,
+    `content` longtext NOT NULL,
+    `price` float NOT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=UTF8");
+  
+  $pdo->exec("CREATE TABLE `orders` (
+    `id` int(11) NOT NULL,
+    `id_user` int(11) NOT NULL,
+    `ids_product` longtext NOT NULL,
+    `priceTTC` float NOT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=UTF8");
+  
+
+  $pdo->exec("CREATE TABLE `users` (
+    `id` int(11) NOT NULL,
+    `lastname` varchar(255) NOT NULL,
+    `firstname` varchar(255) NOT NULL,
+    `address` varchar(255) NOT NULL,
+    `zipCode` varchar(255) NOT NULL,
+    `city` varchar(255) NOT NULL,
+    `country` varchar(255) NOT NULL,
+    `phone` varchar(255) NOT NULL,
+    `mail` varchar(255) NOT NULL,
+    `password` varchar(255) NOT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=UTF8");
+
+  $pdo->exec("ALTER TABLE `beer`
+    ADD PRIMARY KEY (`id`)");
+  
+  $pdo->exec("ALTER TABLE `orders`
+    ADD PRIMARY KEY (`id`)");
+  
+  $pdo->exec("ALTER TABLE `users`
+    ADD PRIMARY KEY (`id`)");
+  
+  $pdo->exec("ALTER TABLE `beer`
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT");
+  
+
+  $pdo->exec("ALTER TABLE `orders`
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT");
+  
+
+  $pdo->exec("ALTER TABLE `users`
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT");
+  
 
 
 //vidage table
@@ -86,6 +138,24 @@ foreach ($posts as $post) {
         echo "|";
     }
 }
+
+
+
+$sql = "INSERT INTO beer (title, img, content, price)
+VALUES (:title, :img, :content, :price)";
+
+$statement = $pdo->prepare($sql);
+
+foreach ($beerArray as $value) {
+        $statement->execute([
+        ':title'	=> $value[0],
+        ':img'		=> $value[1],
+        ':content'	=> $value[2],
+        ':price'	=> $value[3]
+    ]);
+}
+
+echo "||]\n";
 
 $password = password_hash('admin', PASSWORD_BCRYPT);
 echo "||";
