@@ -1,0 +1,19 @@
+{% extends "layout/index.twig" %}
+
+{% block content %}
+
+        <h1>{% block title %}{{ title }}{% endblock %}</h1>
+    <section id="boutiques">
+        {% for value in articles %}
+            <article class="bieres">
+                <h2>{{ value.title }}</h2>
+                <div><img src="{{ value.img }}" alt="{{ value.title }}" /></div>
+                <p>{{ value.content }}</p>
+                <p class="price">{{ value.price }}€</p>
+            </article>
+        {% endfor %}
+    </section>
+
+    {{ paginate | raw }}
+
+{% endblock %}
