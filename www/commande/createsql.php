@@ -73,7 +73,10 @@ $pdo->exec("CREATE TABLE `beer` (
     `country` varchar(255) NOT NULL,
     `phone` varchar(255) NOT NULL,
     `mail` varchar(255) NOT NULL,
-    `password` varchar(255) NOT NULL
+    `password` varchar(255) NOT NULL,
+    `token` varchar(255) NOT NULL,
+    `createdAt` timestamp NULL DEFAULT current_timestamp(),
+    `verify` tinyint(1) NOT NULL DEFAULT 0
   ) ENGINE=InnoDB DEFAULT CHARSET=UTF8");
 
   $pdo->exec("ALTER TABLE `beer`
@@ -104,6 +107,7 @@ $pdo->exec('TRUNCATE TABLE post_category');
 $pdo->exec('TRUNCATE TABLE post');
 $pdo->exec('TRUNCATE TABLE user');
 $pdo->exec('TRUNCATE TABLE category');
+$pdo->exec('TRUNCATE TABLE users');
 $pdo->exec('SET FOREIGN_KEY_CHECKS = 1');
 echo "||||||||||||";
 $faker = Faker\Factory::create('fr_FR');

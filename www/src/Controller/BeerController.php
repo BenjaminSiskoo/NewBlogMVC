@@ -27,7 +27,7 @@ class BeerController extends Controller
     {
         $paginatedQuery = new PaginatedQueryAppController(
             $this->beer,
-            $this->generateUrl('boutique'), 3
+            $this->generateUrl('boutique')
         );
         
         $articles = $paginatedQuery->getItems();
@@ -39,27 +39,6 @@ class BeerController extends Controller
                 "title" => $title,
                 "articles" => $articles,
                 "paginate" => $paginatedQuery->getNavHtml()
-            ]
-        );
-    }
-    public function signup()
-    {
-        $title = 'My Bread Beer Inscription';
-        $this->render(
-            'users/signup',
-            [
-                "title" => $title
-            ]
-        );
-    }
-
-    public function signin()
-    {
-        $title = 'My Bread Beer Connexion';
-        $this->render(
-            'users/signin',
-            [
-                "title" => $title
             ]
         );
     }

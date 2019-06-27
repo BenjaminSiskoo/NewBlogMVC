@@ -32,3 +32,6 @@
 - Ajout de la méthode AllBylimit dans le fichier Core/Model/Table.
 
 ## Etape n°7 :
+
+- Correction de l'affichage des articles du blog en mode portable et tablette
+- Correction du menu burger du Blog en ajoutant les liens JS de boostrap.
