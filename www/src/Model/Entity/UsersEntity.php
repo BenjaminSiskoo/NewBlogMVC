@@ -3,7 +3,7 @@ namespace App\Model\Entity;
 
 use Core\Model\Entity;
 
-class BeerEntity extends Entity
+class UsersEntity extends Entity
 {
 
     private $id;
@@ -80,6 +80,11 @@ class BeerEntity extends Entity
     public function getpassword(): string
     {
         return $this->password;
+    }
+
+    public function setpassword(string $password): void
+    {
+        $this->password=$password;
     }
 
     public function gettoken(): string

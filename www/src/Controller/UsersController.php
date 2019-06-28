@@ -88,18 +88,99 @@ class UsersController extends Controller
         );
     }
 
-    public function signin()
-    {
-
-        if (isset($_POST)){
-            
+    public function signin(string $mail = null, string $token = null, $verify = false)
+    { 
+        if(	isset($_POST["mail"]) && !empty($_POST["mail"]) &&
+		isset($_POST["password"]) && !empty($_POST["password"])
+        ){
+            $mail = $_POST["mail"];
+            $password = $_POST["password"];
+            //dd($mail);
+            $login = $this->users->userConnect($mail);
+            //dd($login);
+            if($login && password_verify(htmlspecialchars($password), $login->getPassword()) && $login->getVerify() == 1) {
+                //dd($password);
+                if($verify){
+                    return true;
+                    //exit();
+                }
+                
+                $login->setPassword(""); //sécurisation en supprimant le mot de passe via la session
+                //dd($login);
+                $_SESSION['auth'] = $login;
+                //connecté
+                header('location: /');
+                exit();
+        
+            }else{
+    
+                if($verify){
+                    return false;
+                    //exit();
+                }
+                if (session_status() != PHP_SESSION_ACTIVE){
+                    session_start();
+                }
+                $_SESSION['auth'] = false;
+                header('location: /signin');
+                exit();
+                //TODO : err pas connecté
+            }
         }
+
+        $message = false;
+
+        if($token)
+        {
+            $token = urldecode($token);
+            $mail = urldecode($mail);
+
+            //récupération du token et le verify (actif) correspondant au mail dans la db
+            $user = $this->users->confirmMail($mail);
+            
+            if ($user){
+                $tokendb = $user->getToken();//recupération du token
+                $verify = $user->getVerify();//verify est à 0 ou 1
+            }
+            // On teste la valeur de la variable $actif récupéré dans la BDD
+            if($verify == '1') // Si le compte est déjà actif on prévient
+              {
+                $message = "Votre compte est déjà actif !";
+              }
+            else // Si ce n'est pas le cas on passe aux comparaisons
+              {
+             if($token == $tokendb) // On compare nos deux clés	
+               {
+              // Si elles correspondent on active le compte !	
+                $message = "Votre compte a bien été activé !";
+     
+              // La requête qui va passer notre champ verify de 0 à 1
+                $updateVerify = $this->users->updateVerifyMail($mail);
+               }
+             else // Si les deux clés sont différentes on provoque une erreur...
+               {
+                $message = "Erreur ! Votre compte ne peut être activé...";
+                dd($token);
+               }
+            }
+        }
+        
+
+
         $title = 'My Bread Beer Connexion';
         return $this->render(
             'users/signin',
             [
-                "title" => $title
+                "title" => $title,
+                "message" => $message
             ]
         );
+    }
+
+    public function disconnect()
+    {
+        unset($_SESSION['auth']);
+        header('Location: /');
+        exit();
     }
 }

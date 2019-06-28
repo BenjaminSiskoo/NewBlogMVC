@@ -15,7 +15,7 @@ class BeerController extends Controller
     public function home(){
         $title = 'Brear Beer Shop';
         // sitebeer/home : sitebeer correspond au dossier dans views et home correspond au fichier home.twig dans views/sitebeer
-        $this->render(
+        return $this->render(
             "sitebeer/home",
             [
                 "title" => $title
@@ -33,7 +33,7 @@ class BeerController extends Controller
         $articles = $paginatedQuery->getItems();
 
         $title = 'My Bread Beer Shop';
-        $this->render(
+        return $this->render(
             'sitebeer/boutique',
             [
                 "title" => $title,

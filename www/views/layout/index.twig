@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
 	<title>Bread Beer Shop</title>
-	<link rel="stylesheet" type="text/css" href="assets/css/styles.css">
+	<link rel="stylesheet" type="text/css" href="/assets/css/styles.css">
 </head>
 <body>
 	<header class="menu">
@@ -14,7 +14,7 @@
 				<li><a href="/">Home</a></li>
 				<li><a href="/index">Blog</a></li>
 				<li><a href="/boutique">Boutique</a></li>
-				{% if connect %}
+				{% if session.auth %}
 					<li><a href="/purchase_order">Bon de commande</a></li>
 					<li><a href="/profil">Profil</a></li>
 					<li><a href="/disconnect">Déconnexion</a></li>

@@ -9,8 +9,8 @@ class MailController
         
         // Create the Transport, tls = plus secure que ssl
             $transport = (new \Swift_SmtpTransport('smtp.gmail.com', 587, 'tls'))
-              ->setUsername(getenv('SETUSERNAME'))
-              ->setPassword(getenv('SETPASSWORD'))
+                ->setUsername(getenv('SETUSERNAME'))
+                ->setPassword(getenv('SETPASSWORD'))
             ;
         
         // Create the Mailer using your created Transport
@@ -23,26 +23,26 @@ class MailController
             
             /*if ($pMailToBcc == true) {
                 $message = (new Swift_Message($subject))
-                  ->setFrom([$setUsername => $pseudo])
-                  ->setBody($pMessage)
-                  ->setBcc($pMailTo);
-              }else{
-                  $message = (new Swift_Message($subject))
-                  ->setFrom([$setUsername => $pseudo])
-                  ->setBody($pMessage)
-                  ->setTo($pMailTo);
-              }*/
+                ->setFrom([$setUsername => $pseudo])
+                ->setBody($pMessage)
+                ->setBcc($pMailTo);
+            }else{
+                $message = (new Swift_Message($subject))
+                ->setFrom([$setUsername => $pseudo])
+                ->setBody($pMessage)
+                ->setTo($pMailTo);
+            }*/
               //ma condition correspondant à
-              $message = (new \Swift_Message($subject));
-              $message->setFrom([(getenv('SETUSERNAME')) => (getenv('SETPSEUDO'))]);
+            $message = (new \Swift_Message($subject));
+            $message->setFrom([(getenv('SETUSERNAME')) => (getenv('SETPSEUDO'))]);
         
-              if ($pMailToBcc == true){
-                  $message->setBcc($pMailTo);
-              }else{
-                  $message->setTo($pMailTo);
-              }
+            if ($pMailToBcc == true){
+                $message->setBcc($pMailTo);
+            }else{
+                $message->setTo($pMailTo);
+            }
         
-              if (is_array($pMessage) && array_key_exists("html", $pMessage) && array_key_exists("text", $pMessage)) {
+            if (is_array($pMessage) && array_key_exists("html", $pMessage) && array_key_exists("text", $pMessage)) {
                 $message->setBody($pMessage["html"], 'text/html');
                 //ou
                 $message->addPart($pMessage["text"], 'text/plain');
