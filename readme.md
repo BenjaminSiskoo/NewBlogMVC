@@ -44,3 +44,5 @@
 - Dans UserTable.php, ajout des méthodes verifMail(), confirmMail(), updateVerifyMail(), userConnect().
 - Création de MailController dans Core\Controller\Helpers\MailController.php. Création de la méthode sendMail().
 - Création de l'URL pour la page de déconnexion.
+
+# Etape n°8 :

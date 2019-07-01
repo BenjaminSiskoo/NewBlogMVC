@@ -1,42 +1,47 @@
 {% extends "layout/index.twig" %}
 
 {% block content %}
-<form method="POST" name="{{title}}" action="/signup">
-<div class="form-group">
-    <label for="mail">Votre courriel</label>
-    <input id="mail" type="email" name="mail" value="{{user.mail}}" required></div>
-<div class="form-group">
-    <label for="mailVerify">vérification de votre courriel</label>
-    <input id="mailVerify" type="email" name="mailVerify" value="{{user.mailVerify}}" required></div>
-<div class="form-group">
-    <label for="lastname">votre nom</label>
-    <input id="lastname" type="text" name="lastname" value="{{user.lastname}}" required></div>
-<div class="form-group">
-    <label for="firstname">votre prénom</label>
-    <input id="firstname" type="text" name="firstname" value="{{user.firstname}}" required></div>
-<div class="form-group">
-    <label for="address">votre adresse</label>
-    <input id="address" type="text" name="address" value="{{user.address}}" required></div>
-<div class="form-group">
-    <label for="zipCode">votre code postal</label>
-    <input id="zipCode" type="text" name="zipCode" value="{{user.zipCode}}" required></div>
-<div class="form-group">
-    <label for="city">votre ville</label>
-    <input id="city" type="text" name="city" value="{{user.city}}" required></div>
-<div class="form-group">
-    <label for="country">votre pays</label>
-    <input id="country" type="text" name="country" value="{{user.country}}" required></div>
-<div class="form-group">
-    <label for="phone">votre numéro de portable</label>
-    <input id="phone" type="tel" name="phone" value="{{user.phone}}" required></div>
-<div class="form-group">
-    <label for="password">votre mot de passe</label>
-    <input id="password" type="password" name="password" value="" required></div>
-<div class="form-group">
-    <label for="passwordVerify">confirmez votre mot de passe</label>
-    <input id="passwordVerify" type="password" name="passwordVerify" value="" required></div>
 
-<button type="submit">Envoyez</button>
+<h1 class="text-center mt-5">{% block title %}{{ title }}{% endblock %}</h1>
+
+<form method="POST" class="row p-3 mb-5 no-gutters" name="{{title}}" action="/signup">
+<div class="form-group col-12 col-sm-6 offset-sm-3">
+    <label for="mail">Votre Courriel :</label>
+    <input class="form-control" id="mail" type="email" name="mail" value="{{user.mail}}" required></div>
+<div class="form-group col-12 col-sm-6 offset-sm-3">
+    <label for="mailVerify">Vérification de Votre Courriel :</label>
+    <input class="form-control" id="mailVerify" type="email" name="mailVerify" value="{{user.mailVerify}}" required></div>
+<div class="form-group col-12 col-sm-6 offset-sm-3">
+    <label for="lastname">Votre Nom :</label>
+    <input class="form-control" id="lastname" type="text" name="lastname" value="{{user.lastname}}" required></div>
+<div class="form-group col-12 col-sm-6 offset-sm-3">
+    <label for="firstname">Votre Prénom :</label>
+    <input class="form-control" id="firstname" type="text" name="firstname" value="{{user.firstname}}" required></div>
+<div class="form-group col-12 col-sm-6 offset-sm-3">
+    <label for="address">Votre Adresse :</label>
+    <input class="form-control" id="address" type="text" name="address" value="{{user.address}}" required></div>
+<div class="form-group col-12 col-sm-6 offset-sm-3">
+    <label for="zipCode">Votre Code Postal :</label>
+    <input class="form-control" id="zipCode" type="text" name="zipCode" value="{{user.zipCode}}" required></div>
+<div class="form-group col-12 col-sm-6 offset-sm-3">
+    <label for="city">Votre Ville :</label>
+    <input class="form-control" id="city" type="text" name="city" value="{{user.city}}" required></div>
+<div class="form-group col-12 col-sm-6 offset-sm-3">
+    <label for="country">Votre Pays :</label>
+    <input class="form-control" id="country" type="text" name="country" value="{{user.country}}" required></div>
+<div class="form-group col-12 col-sm-6 offset-sm-3">
+    <label for="phone">Votre Numéro de Téléphone :</label>
+    <input class="form-control" id="phone" type="tel" name="phone" value="{{user.phone}}" required></div>
+<div class="form-group col-12 col-sm-6 offset-sm-3">
+    <label for="password">Votre Mot de Passe :</label>
+    <input class="form-control" id="password" type="password" name="password" value="" required></div>
+<div class="form-group col-12 col-sm-6 offset-sm-3">
+    <label for="passwordVerify">Confirmez votre Mot de Passe :</label>
+    <input class="form-control" id="passwordVerify" type="password" name="passwordVerify" value="" required></div>
+
+<div class="col-12 col-sm-6 offset-sm-3 text-center">
+    <button type="submit" class="btn btn-success">Envoyez</button>
+</div>
 
 </form>
 {% endblock content %}

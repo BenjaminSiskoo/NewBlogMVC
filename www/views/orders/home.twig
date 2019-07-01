@@ -1,0 +1,76 @@
+{% extends "layout/index.twig" %}
+
+{% block content %}
+
+    <h1>
+        {% block title %}
+            {{ title }}
+        {% endblock %}
+    </h1>
+
+    <section id="purchase_order">
+
+        <form method="POST" action="<?= uri("calculPrice.php") ?>" id="formPurchase">
+            <div class="form_row">
+                <div class="form">
+                    <label>NOM</label>
+                    <input type="text" name="lastname" value="{{ session.auth.lastname}}" required/>
+                </div>
+                <div class="form">
+                    <label>PRENOM</label>
+                    <input type="text" name="firstname" value="{{ session.auth.firstname}}" required/>
+                </div>
+            </div>
+            <div class="form">
+                <label>ADRESSE</label>
+                <input type="text" name="address" value="{{ session.auth.address}}" required/>
+            </div>
+            <div class="form_row">
+                <div class="form">
+                    <label>Code Postal</label>
+                    <input type="text" name="zipCode" value="{{ session.auth.zipCode}}" required/>
+                </div>
+                <div class="form">
+                    <label>VILLE</label>
+                    <input type="text" name="city" value="{{ session.auth.city}}" required/>
+                </div>
+            </div>
+            <div class="form">
+                <label>PAYS</label>
+                <input type="text" name="country" value="{{ session.auth.country}}" required/>
+            </div>
+            <div class="form_row">
+                <div class="form">
+                    <label>TEL</label>
+                    <input type="tel" name="phone" value="{{ session.auth.phone}}" required/>
+                </div>
+                <div class="form">
+                    <label>MAIL</label>
+                    <input type="text" name="mail" value="{{ session.auth.mail}}" disabled/>
+                </div>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nomination</th>
+                        <th>Prix HT</th>
+                        <th>Prix TTC</th>
+                        <th>Quantité</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {% for key,value in articles %}
+                        <tr>
+                            <td>{{ value.title }}</td>
+                            <td id="PHT_{{ key }}">{{ value.price|number_format(2, ',', '.')}}€</td>
+                            <td id="PTTC_{{ key }}">{{ (value.price * constant.TVA)|number_format(2, ',', '.')}}€</td>
+                            <td><input min="0" name="qty[{{ value.id }}]" oninput="calcPrice(this, {{ key }}, {{ value.price }});" type="number" value="0"/></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <button type="submit">COMMANDER</button>
+        </form>
+    </section>
+{% endblock %}

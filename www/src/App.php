@@ -38,6 +38,8 @@ class App
             session_start();                    
         }
 
+        define('TVA', 1.2);
+
         $numPage = URLController::getPositiveInt('page');
 
         if ($numPage !== null) {

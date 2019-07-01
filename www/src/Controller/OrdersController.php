@@ -5,25 +5,15 @@ namespace App\Controller;
 use \Core\Controller\Controller;
 
 
-class BeerController extends Controller
+class OrdersController extends Controller
 {
     public function __construct()
     {
         $this->loadModel('beer');
+        $this->loadModel('users');
     }
 
-    public function home(){
-        $title = 'Brear Beer Shop';
-        // sitebeer/home : sitebeer correspond au dossier dans views et home correspond au fichier home.twig dans views/sitebeer
-        return $this->render(
-            "sitebeer/home",
-            [
-                "title" => $title
-            ]
-        );
-    }
-
-    public function all()
+    public function home()
     {
         $paginatedQuery = new PaginatedQueryAppController(
             $this->beer,
@@ -31,11 +21,10 @@ class BeerController extends Controller
         );
         
         $articles = $paginatedQuery->getItems();
-
-
-        $title = 'My Bread Beer Shop';
+        $title = 'Brear Beer Shop Bon de Commande';
+        //dd($_SESSION['auth']->getLastname());
         return $this->render(
-            'sitebeer/boutique',
+            "orders/home",
             [
                 "title" => $title,
                 "articles" => $articles,
