@@ -46,3 +46,7 @@
 - Création de l'URL pour la page de déconnexion.
 
 # Etape n°8 :
+
+- Ajout du modulo pour afficher une alternance de ligne bleu/vert sur le bond de commande.
+- Amélioration/correction de la partie mobile first en boostrap.
+- Amélioration/correction de la partie grand écran en bootstrap. 

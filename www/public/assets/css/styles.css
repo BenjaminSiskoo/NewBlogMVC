@@ -61,6 +61,14 @@ body {
 .section-login{
   height:68vh;
 }
+
+.odd{
+  background-color:blue;
+}
+
+.even{
+  background-color:red;
+}
 @media (min-width: 768px) {
   body .menu .burger {
     display: none; }

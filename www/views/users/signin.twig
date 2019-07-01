@@ -3,9 +3,9 @@
 {% block content %}
 
 
-    {% if message %}
+{% if message %}
     <p>{{ message }}</p>
-    {% endif %}
+{% endif %}
 <section class="d-flex flex-column align-items-center justify-content-center section-login ">
 <h1 class="text-center mb-2">{% block title %}{{ title }}{% endblock %}</h1>
 <form method="POST" name="{{title}}" action="/signin" class="p-2 w-sm-25 card d-flex align-items-center justify-content-center">
