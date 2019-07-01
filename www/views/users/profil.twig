@@ -1,0 +1,49 @@
+{% extends "layout/index.twig" %}
+
+{% block content %}
+    <h1 class="text-center mt-5">{% block title %}{{ title }}{% endblock %}</h1>
+
+<form method="POST" class="row p-3 mb-5 no-gutters" name="user_info" action="/profil">
+<div class="form-group col-12 col-sm-6 offset-sm-3">
+    <label for="lastname">Votre Nom :</label>
+    <input class="form-control" id="lastname" type="text" name="lastname" value="{{session.auth.lastname}}" required></div>
+<div class="form-group col-12 col-sm-6 offset-sm-3">
+    <label for="firstname">Votre Prénom :</label>
+    <input class="form-control" id="firstname" type="text" name="firstname" value="{{session.auth.firstname}}" required></div>
+<div class="form-group col-12 col-sm-6 offset-sm-3">
+    <label for="address">Votre Adresse :</label>
+    <input class="form-control" id="address" type="text" name="address" value="{{session.auth.address}}" required></div>
+<div class="form-group col-12 col-sm-6 offset-sm-3">
+    <label for="zipCode">Votre Code Postal :</label>
+    <input class="form-control" id="zipCode" type="text" name="zipCode" value="{{session.auth.zipCode}}" required></div>
+<div class="form-group col-12 col-sm-6 offset-sm-3">
+    <label for="city">Votre Ville :</label>
+    <input class="form-control" id="city" type="text" name="city" value="{{session.auth.city}}" required></div>
+<div class="form-group col-12 col-sm-6 offset-sm-3">
+    <label for="country">Votre Pays :</label>
+    <input class="form-control" id="country" type="text" name="country" value="{{session.auth.country}}" required></div>
+<div class="form-group col-12 col-sm-6 offset-sm-3">
+    <label for="phone">Votre Numéro de Téléphone :</label>
+    <input class="form-control" id="phone" type="text" name="phone" value="{{session.auth.phone}}" required></div>
+<div class="col-12 col-sm-6 offset-sm-3 text-center">
+    <button type="submit" name="user_button" value="user_button" class="btn btn-success" for="user_info">Confirmez</button>
+</div>
+</form>
+
+<form method="POST" class="row p-3 mb-5 no-gutters" name="user_password" action="/profil">
+<div class="form-group col-12 col-sm-6 offset-sm-3">
+    <label for="password">Votre ancien Mot de Passe :</label>
+    <input class="form-control" id="password" type="password" name="password" value="" required></div>
+    <div class="form-group col-12 col-sm-6 offset-sm-3">
+    <label for="password">Votre nouveau Mot de Passe :</label>
+    <input class="form-control" id="password" type="password" name="password" value="" required></div>
+<div class="form-group col-12 col-sm-6 offset-sm-3">
+    <label for="passwordVerify">Confirmez votre Mot de Passe :</label>
+    <input class="form-control" id="passwordVerify" type="password" name="passwordVerify" value="" required></div>
+
+<div class="col-12 col-sm-6 offset-sm-3 text-center">
+    <button type="submit" name="password_button" value="password_button" class="btn btn-success" for="user_password">Envoyez</button>
+</div>
+
+</form>
+{% endblock content %}

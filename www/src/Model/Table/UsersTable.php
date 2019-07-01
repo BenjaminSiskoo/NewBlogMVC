@@ -38,4 +38,9 @@ class UsersTable extends Table
     {
         return $this->query("SELECT * FROM users WHERE `mail`= :mail", [":mail"=>$mail], true);
     }
+
+    public function updateUserInfo($arrayUserInfo, $id)
+    {   //dd($arrayUserInfo);
+        return $this->query("UPDATE users SET lastname = ?, firstname = ?, address = ?, zipCode = ?, city = ?, country = ?, phone = ? WHERE id = ?", $arrayUserInfo);
+    }
 }

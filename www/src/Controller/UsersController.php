@@ -144,28 +144,26 @@ class UsersController extends Controller
             }
             // On teste la valeur de la variable $actif récupéré dans la BDD
             if($verify == '1') // Si le compte est déjà actif on prévient
-              {
+                {
                 $message = "Votre compte est déjà actif !";
-              }
+                }
             else // Si ce n'est pas le cas on passe aux comparaisons
-              {
+                {
              if($token == $tokendb) // On compare nos deux clés	
-               {
+                {
               // Si elles correspondent on active le compte !	
                 $message = "Votre compte a bien été activé !";
-     
+    
               // La requête qui va passer notre champ verify de 0 à 1
                 $updateVerify = $this->users->updateVerifyMail($mail);
-               }
-             else // Si les deux clés sont différentes on provoque une erreur...
-               {
+                }
+            else // Si les deux clés sont différentes on provoque une erreur...
+                {
                 $message = "Erreur ! Votre compte ne peut être activé...";
                 dd($token);
-               }
+                }
             }
         }
-        
-
 
         $title = 'My Bread Beer Connexion';
         return $this->render(
@@ -182,5 +180,52 @@ class UsersController extends Controller
         unset($_SESSION['auth']);
         header('Location: /');
         exit();
+    }
+
+    public function contact()
+    {
+        $title = 'My Bread Beer Contact';
+        return $this->render(
+            'users/contact',
+            [
+                "title" => $title
+            ]
+        );
+
+    }
+
+    public function profil()
+    {
+        if ($_POST['user_button']=='user_button')
+        {
+            $id = $_SESSION['auth']->getId();
+            $lastname = $_POST['lastname'];
+            $firstname = $_POST['firstname'];
+            $address = $_POST['address'];
+            $zipCode = $_POST['zipCode'];
+            $city = $_POST['city'];
+            $country = $_POST['country'];
+            $phone = $_POST['phone'];
+            if (!empty($lastname && $firstname && $address && $zipCode && $city && $country && $phone))
+            {
+                $arrayUserInfo = [$lastname, $firstname, $address, $zipCode, $city, $country, $phone, $id];
+                $results = $this->users->updateUserInfo($arrayUserInfo, $id);
+                $_SESSION['auth']=$this->users->find($id);
+                if($results){
+                    header('Location: /profil');
+                    exit();
+                }
+            }
+        }
+
+
+
+        $title = 'My Bread Beer Profil';
+        return $this->render(
+            'users/profil',
+            [
+                "title" => $title
+            ]
+        );
     }
 }
